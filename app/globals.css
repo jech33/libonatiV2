@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
 html {
   background-color: #000000;
+  scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar {
+  width: 0.5rem;
+  z-index: 1000000;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+  @apply bg-libonatiGrayYellow;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+  background: rgb(65, 64, 64);
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+  @apply bg-libonatiGold-80;
 }

@@ -1,18 +1,21 @@
-import { Montserrat } from 'next/font/google';
-import LogoLibonati from './components/LogoLibonati';
-import './globals.css';
+/** Functional **/
+import LogoLibonati from '@components/LogoLibonati';
+import MainSection from '@components/MainSection';
+import SectionTwo from '@components/SectionTwo';
+import Shows from '@components/Shows';
 
-const montserrat = Montserrat({ subsets: ['latin'] });
+/** Assets **/
+import './globals.css';
+import ScrollTopButton from '@components/ScrollTopButton';
 
 export default function Home() {
-  const separatorClassnames = `w-6/12 mx-auto border-0
+  const separatorClassnames = `w-6/12 mx-auto border-0 mb-[4.5rem]
   h-[0.25rem] bg-libonatiGold
   lg:hidden`;
 
   return (
-    <main
-      className={`${montserrat.className} container mx-auto text-libonatiGold`}
-    >
+    <main className={`text-libonatiGold z-10`}>
+      <ScrollTopButton />
       {/* Logo */}
       <div className="flex m-auto md:container h-[100dvh] items-center px-5">
         <LogoLibonati
@@ -30,7 +33,8 @@ export default function Home() {
 
         {/* The Band and Swiper Section */}
         <section className="md:container mx-auto flex flex-col lg:flex-row xl:px-10 2xl:px-0">
-          {/* <MainSection /> */}
+          {/* @ts-expect-error Async Server Component */}
+          <MainSection />
         </section>
       </div>
 
@@ -40,7 +44,7 @@ export default function Home() {
       {/* History and Video */}
       <div className="w-full">
         <section className="flex flex-col items-center mx-auto mb-24 md:mb-36 xl:px-10 2xl:px-0">
-          {/* <SectionTwo /> */}
+          <SectionTwo />
         </section>
       </div>
 
@@ -50,7 +54,7 @@ export default function Home() {
       {/* Shows */}
       <div className="w-full">
         <section className="flex flex-col mx-auto w-full">
-          {/* <Shows /> */}
+          <Shows />
         </section>
       </div>
     </main>
