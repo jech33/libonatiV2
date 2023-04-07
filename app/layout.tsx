@@ -1,6 +1,6 @@
 /** Libraries **/
 import { Metadata } from 'next';
-import { montserrat, roboto } from '@shared/fonts';
+import { montserrat } from '@shared/fonts';
 
 /** Functional **/
 import Footer from '@components/Footer';

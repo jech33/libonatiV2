@@ -10,8 +10,6 @@ const Shows = () => {
     [key: string]: any;
   };
 
-  console.log(flagImage);
-
   const [showsConverted, setShowsConverted] = useState<any[]>([]);
 
   const convertShows = useCallback(() => {
