@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import SpotifyWidget from '@components/SpotifyWidget';
 import shows from './Shows.mock.json';
 import flagImage from '@images/Flag-Mockup.png';
+import { typography } from '@shared/fonts';
 
 const Shows = () => {
   type _show = {
@@ -51,7 +52,9 @@ const Shows = () => {
       py-10 px-10 mb-20
       bg-libonatiDarkBlack/80 rounded-xl backdrop-blur-xl"
         >
-          <h1 className="text-libonatiWhiteFont">LIVE SHOWS</h1>
+          <h1 className={`${typography.h1} text-libonatiWhiteFont mb-7`}>
+            LIVE SHOWS
+          </h1>
           <hr className="border-libonatiGrayYellow w-full" />
           {showsConverted.map((show: any) => (
             <div
