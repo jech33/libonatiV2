@@ -66,7 +66,7 @@ export default function SwiperHome({
               <h2
                 className={`${typography.h2} 
                 bg-black bg-opacity-70 backdrop-blur 
-                min-w-2/6 p-2 px-3 mx-auto z-[1]`}
+                min-w-[25%] p-2 px-5 mx-auto z-[1]`}
               >
                 {crewMate.nickname.toUpperCase()}
               </h2>
