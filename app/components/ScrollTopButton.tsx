@@ -27,9 +27,12 @@ const ScrollTopButton = () => {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
-  window.onscroll = function () {
-    scrollFunction();
-  };
+  if (typeof window !== 'undefined') {
+    // browser code
+    window.onscroll = function () {
+      scrollFunction();
+    };
+  }
 
   return (
     <button
