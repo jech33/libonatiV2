@@ -36,7 +36,6 @@ export default function SwiperHome({
         modules={[Navigation, FreeMode, Pagination]}
         slidesPerView={1}
         spaceBetween={0}
-        freeMode
         loop
         navigation
         pagination={{ clickable: true }}
@@ -67,7 +66,7 @@ export default function SwiperHome({
               <h2
                 className={`${typography.h2} 
                 bg-black bg-opacity-70 backdrop-blur 
-                w-2/6 p-2 mx-auto z-[1]`}
+                min-w-2/6 p-2 px-3 mx-auto z-[1]`}
               >
                 {crewMate.nickname.toUpperCase()}
               </h2>
