@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-param-reassign */
 import React, { useCallback, useEffect, useState } from 'react';
 import SpotifyWidget from '@components/SpotifyWidget';
@@ -32,6 +33,7 @@ const Shows = () => {
 
   useEffect(() => {
     convertShows();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shows]);
 
   return (
