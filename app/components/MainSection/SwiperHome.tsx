@@ -61,6 +61,7 @@ export default function SwiperHome({
                 src={`https:${crewMate.mainPhoto}?fit=fill&fm=webp&f=face&w=1000&h=1080`}
                 className={`object-cover`}
                 fill
+                priority
                 quality={80}
               />
               <h2
