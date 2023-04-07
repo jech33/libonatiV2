@@ -60,7 +60,7 @@ const Shows = () => {
             <div
               key={show.id}
               className="flex flex-col md:flex-row w-full lg:max-w-[70rem]
-            py-3 px-4
+            py-3 sm:px-4
             border-b-[0.065rem] border-libonatiGrayYellow"
             >
               <div className="px-2 md:w-3/12 lg:w-2/12">
