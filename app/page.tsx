@@ -17,11 +17,11 @@ export default function Home() {
     <main className={`text-libonatiGold z-10`}>
       <ScrollTopButton />
       {/* Logo */}
-      <div className="flex m-auto md:container h-[100dvh] items-center px-5">
+      <div className="flex m-auto md:container h-[100svh] items-center px-5">
         <LogoLibonati
           colorstroke="stroke-libonatiGold"
           colorfill="fill-libonatiGold"
-          height="70dvh"
+          height="70svh"
           width="100%"
         />
       </div>
