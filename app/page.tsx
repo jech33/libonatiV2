@@ -5,8 +5,8 @@ import SectionTwo from '@components/SectionTwo';
 import Shows from '@components/Shows';
 
 /** Assets **/
-import './globals.css';
 import ScrollTopButton from '@components/ScrollTopButton';
+import Footer from '@components/Footer';
 
 export default function Home() {
   const separatorClassnames = `w-6/12 mx-auto border-0 mb-[4.5rem]
@@ -57,6 +57,7 @@ export default function Home() {
           <Shows />
         </section>
       </div>
+      <Footer />
     </main>
   );
 }

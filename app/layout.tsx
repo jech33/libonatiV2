@@ -2,8 +2,8 @@
 import { Metadata } from 'next';
 import { montserrat } from '@shared/fonts';
 
-/** Functional **/
-import Footer from '@components/Footer';
+/** Assets **/
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Bruno Libonati',
@@ -18,12 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.className}
-        bg-gradient-to-r from-black to-libonatiDarkBlack
-        min-h-[100dvh]`}
+        className={`${montserrat.className} margin-0
+        bg-gradient-to-r from-black to-libonatiDarkBlack 
+        flex flex-col min-h-[100dvh]`}
       >
         {children}
-        <Footer />
       </body>
     </html>
   );
