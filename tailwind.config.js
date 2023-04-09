@@ -8,6 +8,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        montserrat: ['var(--font-montserrat)', 'sans-serif'],
+        lora: ['var(--font-lora)', 'sans-serif'],
+        roboto: ['var(--font-roboto)', 'sans-serif'],
+      },
+      fontSize: {
+        heading: ['3rem'],
+        subheading: ['1rem', { fontWeight: 'bold' }],
+        body1: ['1.125rem'],
+      },
       colors: {
         libonatiGold: '#b48b47',
         libonatiDarkBlack: '#2a2a2a',

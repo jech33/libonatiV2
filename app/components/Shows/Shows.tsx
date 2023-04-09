@@ -1,41 +1,32 @@
 'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-param-reassign */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SpotifyWidget from '@components/SpotifyWidget';
-import shows from './Shows.mock.json';
 import flagImage from '@images/Flag-Mockup.png';
-import { typography } from '@shared/fonts';
+import { useLiboStore } from '@store/liboStore';
 
 const Shows = () => {
-  type _show = {
-    [key: string]: any;
-  };
+  const events = useLiboStore((state) => state.events);
 
-  const [showsConverted, setShowsConverted] = useState<any[]>([]);
+  const [eventsConverted, setEventsConverted] = useState<any[]>([]);
 
-  const convertShows = useCallback(() => {
+  const convertShows = () => {
     const options = { weekday: 'short', month: 'short', day: 'numeric' };
     const year = { year: 'numeric' };
-    const convert = JSON.parse(JSON.stringify(shows));
-    convert.map((show: _show) => {
-      const showDate = new Date(show.date);
-      show.date = showDate;
-      return show;
+
+    const formattedEvents = events.map((event: any) => {
+      event.year = event.date.toLocaleDateString('en-US', year);
+      event.date = event.date.toLocaleDateString('en-US', options); // Saturday, September 17, 2016
+      return event;
     });
-    convert.sort((a: any, b: any) => b.date - a.date);
-    convert.map((show: any) => {
-      show.year = show.date.toLocaleDateString('en-US', year);
-      show.date = show.date.toLocaleDateString('en-US', options); // Saturday, September 17, 2016
-      return show;
-    });
-    setShowsConverted(convert);
-  }, []);
+    setEventsConverted(formattedEvents);
+  };
 
   useEffect(() => {
     convertShows();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shows]);
+  }, [events]);
 
   return (
     <div
@@ -52,26 +43,26 @@ const Shows = () => {
       py-10 px-10 mb-20
       bg-libonatiDarkBlack/80 rounded-xl backdrop-blur-xl"
         >
-          <h1 className={`${typography.h1} text-libonatiWhiteFont mb-7`}>
+          <h1 className={`text-heading text-libonatiWhiteFont mb-7`}>
             LIVE SHOWS
           </h1>
           <hr className="border-libonatiGrayYellow w-full" />
-          {showsConverted.map((show: any) => (
+          {eventsConverted.map((event: any, idx) => (
             <div
-              key={show.id}
+              key={idx}
               className="flex flex-col md:flex-row w-full lg:max-w-[70rem]
             py-3 sm:px-4
             border-b-[0.065rem] border-libonatiGrayYellow"
             >
               <div className="px-2 md:w-3/12 lg:w-2/12">
-                {show.date.toString()}
+                {event.date.toString()}
                 <br />
-                {show.year.toString()}
+                {event.year.toString()}
               </div>
               <div className="px-2 md:w-8/12 lg:w-9/12 text-libonatiWhiteFont">
-                {show.venue}
+                {event.name}
               </div>
-              <div className="px-2 md:w-3/12 lg:w-3/12">{show.location}</div>
+              <div className="px-2 md:w-3/12 lg:w-3/12">{event.location}</div>
             </div>
           ))}
         </div>

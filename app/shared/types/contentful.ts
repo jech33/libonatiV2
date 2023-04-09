@@ -7,3 +7,10 @@ export type ContentfulMember = {
   photos: string[];
   active: boolean;
 };
+
+export type ContentfulEvent = {
+  name: string;
+  location: string;
+  date: Date;
+  media: string[];
+};

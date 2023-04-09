@@ -1,3 +1,4 @@
+'use client';
 /** Functional **/
 import LogoLibonati from '@components/LogoLibonati';
 import MainSection from '@components/MainSection';
@@ -7,17 +8,26 @@ import Shows from '@components/Shows';
 /** Assets **/
 import ScrollTopButton from '@components/ScrollTopButton';
 import Footer from '@components/Footer';
+import { useLiboStore } from '@store/liboStore';
+import { useEffect } from 'react';
 
 export default function Home() {
   const separatorClassnames = `w-6/12 mx-auto border-0 mb-[4.5rem]
   h-[0.25rem] bg-libonatiGold
   lg:hidden`;
 
+  const fetchContentful = useLiboStore((state) => state.fetchContentful);
+
+  useEffect(() => {
+    fetchContentful();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <main className={`text-libonatiGold z-10`}>
+    <main className={`text-libonatiGold`}>
       <ScrollTopButton />
       {/* Logo */}
-      <div className="flex m-auto md:container h-[100svh] items-center px-5">
+      <div className="m-auto flex h-[100svh] items-center px-5 md:container">
         <LogoLibonati
           colorstroke="stroke-libonatiGold"
           colorfill="fill-libonatiGold"
@@ -27,13 +37,12 @@ export default function Home() {
       </div>
 
       {/* Content */}
-      <div className="mb-36 w-full text-libonatiGold z-10">
+      <div className="z-10 mb-36 w-full text-libonatiGold">
         {/* Separator on Mobile */}
         <hr className={separatorClassnames} />
 
         {/* The Band and Swiper Section */}
-        <section className="md:container mx-auto flex flex-col lg:flex-row xl:px-10 2xl:px-0">
-          {/* @ts-expect-error Async Server Component */}
+        <section className="mx-auto flex flex-col md:container lg:flex-row xl:px-10 2xl:px-0">
           <MainSection />
         </section>
       </div>
@@ -43,7 +52,7 @@ export default function Home() {
 
       {/* History and Video */}
       <div className="w-full">
-        <section className="flex flex-col items-center mx-auto mb-24 md:mb-36 xl:px-10 2xl:px-0">
+        <section className="mx-auto mb-24 flex flex-col items-center md:mb-36 xl:px-10 2xl:px-0">
           <SectionTwo />
         </section>
       </div>
@@ -53,7 +62,7 @@ export default function Home() {
 
       {/* Shows */}
       <div className="w-full">
-        <section className="flex flex-col mx-auto w-full">
+        <section className="mx-auto flex w-full flex-col">
           <Shows />
         </section>
       </div>

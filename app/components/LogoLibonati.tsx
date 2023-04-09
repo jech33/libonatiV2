@@ -10,7 +10,13 @@ type Props = {
 
 const LogoLibonati: React.FC<Props> = (props) => {
   /* Pass color as a TAILWIND string to change the color of the logo */
-  const { className, height, width, colorstroke, colorfill } = props;
+  const {
+    className = 'logoLibonati',
+    height = '70vh',
+    width = 'auto',
+    colorstroke,
+    colorfill,
+  } = props;
   return (
     <svg
       {...props}
@@ -340,12 +346,6 @@ const LogoLibonati: React.FC<Props> = (props) => {
       />
     </svg>
   );
-};
-
-LogoLibonati.defaultProps = {
-  className: 'logoLibonati',
-  height: '70vh',
-  width: 'auto',
 };
 
 export default LogoLibonati;

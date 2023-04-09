@@ -1,4 +1,12 @@
+/** Libraries **/
 import { createClient } from 'contentful';
+
+/** Functional **/
+import {
+  sanitizeContentfulMembers,
+  sanitizeEvents,
+  sanitizePosts,
+} from './utils';
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID as string, // ID of a Compose-compatible space to be used \
@@ -8,32 +16,59 @@ const client = createClient({
 type GetPageParams = {
   pageContentType?: string;
   locale?: string;
+  order?: string;
+  limit?: number;
+  skip?: number;
 };
 
 export async function getContentful(params: GetPageParams) {
-  const { pageContentType = '', locale = 'en-US' } = params;
+  const { pageContentType = '', locale = 'en-US', ...options } = params;
   const query = {
+    ...options,
     content_type: pageContentType,
     locale,
   };
   const { items } = await client.getEntries(query);
-  const members = transformContentfulMembers(items);
-  return members || null;
+  return items;
 }
 
-function transformContentfulMembers(members: unknown[]) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return members.map((member: any) => {
-    const { fields } = member;
-    return {
-      id: fields.id,
-      nickname: fields.nickname,
-      name: fields.name,
-      lastName: fields.lastName,
-      mainPhoto: fields.mainPhoto.fields.file.url,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      photos: fields.photos.map((photo: any) => photo.fields.file.url),
-      active: fields.active,
-    };
-  });
-}
+export const getPosts = async () => {
+  try {
+    const data = await getContentful({
+      pageContentType: 'post',
+    });
+    const posts = sanitizePosts(data);
+    return posts;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+export const getEvents = async () => {
+  try {
+    const data = await getContentful({
+      pageContentType: 'events',
+      limit: 10,
+      order: '-fields.date',
+    });
+    const events = sanitizeEvents(data);
+    return events;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+export const getMembers = async () => {
+  try {
+    const data = await getContentful({
+      pageContentType: 'bandMembers',
+    });
+    const members = sanitizeContentfulMembers(data);
+    return members;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};

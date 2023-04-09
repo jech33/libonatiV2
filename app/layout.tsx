@@ -1,6 +1,6 @@
 /** Libraries **/
 import { Metadata } from 'next';
-import { montserrat } from '@shared/fonts';
+import { lora, montserrat, roboto } from '@shared/fonts';
 
 /** Assets **/
 import './globals.css';
@@ -18,9 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.className} margin-0
-        bg-gradient-to-r from-black to-libonatiDarkBlack 
-        flex flex-col min-h-[100dvh]`}
+        className={`${montserrat.variable} ${lora.variable} ${roboto.variable}
+        font-montserrat margin-0 flex min-h-[100dvh] flex-col 
+        bg-gradient-to-r from-black to-libonatiDarkBlack`}
       >
         {children}
       </body>

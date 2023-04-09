@@ -1,57 +1,32 @@
-import { typography } from '@shared/fonts';
+'use client';
+/** Functional **/
 import SwiperHome from './SwiperHome';
-import { getContentful } from '@api/contentful/route';
-
-const getMembers = async () => {
-  const data = await getContentful({
-    pageContentType: 'bandMembers',
-  });
-  return data;
-};
+import { useLiboStore } from '@store/liboStore';
 
 // It should have all text on a json file
-const MainSection = async () => {
-  const members = (await getMembers()) || [];
+const MainSection = () => {
+  const post = useLiboStore((state) => state.homeSection1);
   return (
     <>
-      <article
-        className="flex flex-col pb-8 text-center
-          sm:w-12/12 lg:w-6/12
-          lg:pr-10 p-3 lg:pb-0 lg:text-left"
-      >
-        <h1
-          className={`${typography.h1} text-center lg:text-left mb-10 lg:mb-5`}
-        >
-          THE BAND
+      <article className="text-libonatiGold w-12/12 flex flex-col p-3 pb-8 text-center lg:w-6/12 lg:pb-0 lg:pr-10 lg:text-left">
+        <h1 className={`text-heading mb-10 text-center lg:mb-5 lg:text-left`}>
+          {post.title.toUpperCase()}
         </h1>
-        <h3 className={`${typography.h3} text-libonatiGrayYellow`}>
-          Vestibulum in facilisis lectus. Praesent sit amet urna pulvinar,
-          gravida magna commodo, molestie purus. Cras laoreet vitae risus vel...
+        <h3 className={`text-subheading font-lora text-libonatiGrayYellow`}>
+          {post.subtitle}
         </h3>
         <br />
-        <p className="text-libonatiGrayYellow">
-          Vestibulum in facilisis lectus. Praesent sit amet urna pulvinar,
-          gravida magna commodo, molestie purus. Cras laoreet vitae risus vel
-          laoreet. Suspendisse dignissim efficitur urna nec elementum. Duis
-          faucibus neque ac erat finibus, bibendum ullamcorper quam egestas.
-          Quisque non felis ex. Aenean id metus nec quam facilisis vulputate.
-          Quisque sem mauris, tempor ac dui eget, fringilla luctus velit. Ut
-          dignissim in diam a tincidunt. Curabitur id neque urna. Nulla laoreet
-          mi sed neque efficitur ultrices. Suspendisse quis mattis urna, vitae
-          pellentesque ex.
+        <p className="text-body1 font-roboto text-libonatiGrayYellow">
+          {post.content}
         </p>
       </article>
-      <figure
-        className="flex w-full h-screen max-h-screen min-h-[30rem]
-           md:h-full
-           lg:w-6/12 lg:border-l-4 lg:border-t-4 lg:border-libonatiGold"
-      >
+      <figure className="flex h-screen max-h-screen min-h-[30rem] w-full md:h-full lg:w-6/12 lg:border-l-4 lg:border-t-4 lg:border-libonatiGold">
         <div
-          className="w-full md:pl-2 md:pt-2 md:mb-2
-            flex sm:justify-items-center
-            shadow-gray shadow-xl"
+          className="shadow-gray flex w-full shadow-xl
+            sm:justify-items-center md:mb-2
+            md:pl-2 md:pt-2"
         >
-          <SwiperHome id="Home" crew={members} />
+          <SwiperHome id="Home" />
         </div>
       </figure>
     </>
