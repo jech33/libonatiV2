@@ -37,11 +37,11 @@ export default function ReleasePage({
   const fetchRelease = async () => {
     setLoading(true);
     const data = await getRelease(params.id);
-    setLoading(false);
     if (!data || !data?.active) {
       push('/');
       return;
     }
+    setLoading(false);
     setRelease(data);
   };
 
@@ -147,18 +147,28 @@ export default function ReleasePage({
         ) : (
           <>
             <Image
-              className="object-cover blur-2xl"
+              className="object-fill blur-2xl bg-black bg-opacity-20"
+              placeholder="blur"
+              blurDataURL="@components/images/blur.png"
               alt={`${release.name} background image`}
               fill
+              priority
+              onLoadStart={() => {
+                setLoading(true);
+              }}
+              onLoad={() => {
+                setLoading(false);
+              }}
               src={release.image}
             />
             <div className="fixed h-full w-full bg-black bg-opacity-20" />
-            <section className="w-[320px] rounded-lg overflow-hidden z-10 flex flex-col flex-grow items-center first-letter:uppercase mt-12">
-              <figure>
+            <section className="bg-transparent w-[320px] rounded-lg overflow-hidden z-10 flex flex-col flex-grow items-center first-letter:uppercase mt-12">
+              <figure className="">
                 <Image
                   alt={`${release.name} cover image`}
                   width={320}
                   height={320}
+                  priority
                   src={release.image}
                 />
               </figure>
