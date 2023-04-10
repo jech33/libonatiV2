@@ -6,7 +6,9 @@ import {
   sanitizeContentfulMembers,
   sanitizeEvents,
   sanitizePosts,
+  sanitizeRelease,
 } from './utils';
+import { ContentfulRelease } from '@shared/types/contentful';
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID as string, // ID of a Compose-compatible space to be used \
@@ -19,6 +21,7 @@ type GetPageParams = {
   order?: string;
   limit?: number;
   skip?: number;
+  [attribute: string]: string | number | undefined;
 };
 
 export async function getContentful(params: GetPageParams) {
@@ -45,6 +48,19 @@ export const getPosts = async () => {
   }
 };
 
+export const getMembers = async () => {
+  try {
+    const data = await getContentful({
+      pageContentType: 'bandMembers',
+    });
+    const members = sanitizeContentfulMembers(data);
+    return members;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
 export const getEvents = async () => {
   try {
     const data = await getContentful({
@@ -60,15 +76,32 @@ export const getEvents = async () => {
   }
 };
 
-export const getMembers = async () => {
+export const getRelease = async (id: string) => {
   try {
     const data = await getContentful({
-      pageContentType: 'bandMembers',
+      pageContentType: 'releases',
+      limit: 1,
+      order: '-fields.releaseDate',
+      'fields.id': id,
     });
-    const members = sanitizeContentfulMembers(data);
-    return members;
+    const release = sanitizeRelease(data[0]);
+    return release as ContentfulRelease;
   } catch (error) {
     console.error(error);
-    return [];
+    return null;
+  }
+};
+
+export const getLatestRelease = async () => {
+  try {
+    const data = await getContentful({
+      pageContentType: 'releases',
+      order: '-fields.releaseDate',
+    });
+    const latestRelease = sanitizeRelease(data[0]);
+    return latestRelease as ContentfulRelease;
+  } catch (error) {
+    console.error(error);
+    return null;
   }
 };

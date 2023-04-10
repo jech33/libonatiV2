@@ -8,6 +8,10 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Bruno Libonati',
   description: "Bruno Libonati's band website",
+  authors: {
+    url: 'https://www.linkedin.com/in/javier-echavez-chardaux/',
+    name: 'Javier Echavez Chardaux',
+  },
 };
 
 export default function RootLayout({

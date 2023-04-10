@@ -29,14 +29,12 @@ const ScrollTopButton = () => {
 
   if (typeof window !== 'undefined') {
     // browser code
-    window.onscroll = function () {
-      scrollFunction();
-    };
+    window.addEventListener('scroll', scrollFunction);
   }
 
   return (
     <button
-      className="fixed bottom-6 right-6 transition delay-100 z-50 bg-libonatiDarkBlack bg-opacity-50 backdrop-blur-xl rounded-[50%]"
+      className="fixed bottom-6 right-6 transition delay-100 z-50 bg-libonatiDarkBlack bg-opacity-50 backdrop-blur-xl rounded-[50%] opacity-0 pointer-events-none"
       ref={buttonRef}
       onClick={topFunction}
     >
