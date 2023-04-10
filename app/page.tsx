@@ -11,12 +11,9 @@ import Navbar from '@components/Navbar';
 import ScrollTopButton from '@components/ScrollTopButton';
 import Footer from '@components/Footer';
 import { useLiboStore } from '@store/liboStore';
+import HomeDivider from '@components/HomeDivider';
 
 export default function Home() {
-  const separatorClassnames = `w-6/12 mx-auto border-0 mb-[4.5rem]
-  h-[0.25rem] bg-libonatiGold
-  lg:hidden`;
-
   const fetchContentful = useLiboStore((state) => state.fetchContentful);
 
   useEffect(() => {
@@ -42,7 +39,7 @@ export default function Home() {
         {/* Content */}
         <div className="z-10 mb-36 w-full text-libonatiGold">
           {/* Separator on Mobile */}
-          <hr className={separatorClassnames} />
+          <HomeDivider />
 
           {/* The Band and Swiper Section */}
           <section className="mx-auto flex flex-col md:container lg:flex-row xl:px-10 2xl:px-0">
@@ -51,7 +48,7 @@ export default function Home() {
         </div>
 
         {/* Separator on Mobile */}
-        <hr className={separatorClassnames} />
+        <HomeDivider />
 
         {/* History and Video */}
         <div className="w-full">
@@ -61,7 +58,7 @@ export default function Home() {
         </div>
 
         {/* Separator on Mobile */}
-        <hr className={separatorClassnames} />
+        <HomeDivider />
 
         {/* Shows */}
         <div className="w-full">

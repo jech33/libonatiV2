@@ -3,7 +3,7 @@ const Loader = ({ className = '' }: { className?: string }) => {
     <div role="status">
       <svg
         aria-hidden="true"
-        className={`w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-libonatiDarkBlack fill-libonatiGold ${className}`}
+        className={`mr-2 h-10 w-10 animate-spin fill-libonatiGold text-gray-200 dark:text-libonatiDarkBlack ${className}`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

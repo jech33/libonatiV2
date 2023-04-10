@@ -38,16 +38,8 @@ export default function SwiperHome({ id }: { id: string }) {
             key={crewMate.nickname}
             className="[&>.swiper-button-next]:text-libonatiGold"
           >
-            <div
-              className="absolute h-screen w-full
-            bg-gradient-to-t from-black px-20 py-10
-            opacity-90 lg:h-full lg:w-full"
-            />
-            <div
-              className="relative flex h-full w-full flex-col
-            justify-end py-10 text-center text-libonatiGold
-            lg:h-full lg:w-full"
-            >
+            <div className="absolute h-screen w-full bg-gradient-to-t from-black px-20 py-10 opacity-90 lg:h-full lg:w-full" />
+            <div className="relative flex h-full w-full flex-col justify-end py-10 text-center text-libonatiGold lg:h-full lg:w-full">
               <Image
                 alt={`${crewMate.nickname} photo`}
                 src={crewMate.mainPhoto}
@@ -57,9 +49,9 @@ export default function SwiperHome({ id }: { id: string }) {
                 quality={80}
               />
               <h2
-                className={`text-libonatiGold font-montserrat text-3xl
-                user-select-none z-[1] mx-auto min-w-[25%] hover:cursor-default
-                bg-black bg-opacity-70 p-2 px-5 backdrop-blur`}
+                className={`user-select-none z-[1] mx-auto
+                min-w-[25%] bg-black bg-opacity-70 p-2 px-5
+                font-montserrat text-3xl text-libonatiGold backdrop-blur hover:cursor-default`}
               >
                 {crewMate.nickname.toUpperCase()}
               </h2>

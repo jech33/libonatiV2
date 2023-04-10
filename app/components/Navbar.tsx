@@ -75,7 +75,7 @@ const Navbar = ({
 
   return (
     <nav
-      className="fixed top-6 right-6 bg-libonatiDarkBlack bg-opacity-80 rounded-3xl py-2 z-50 backdrop-blur-md shadow-md transition-transform duration-200 ease-in-out"
+      className="fixed right-6 top-6 z-50 rounded-3xl bg-libonatiDarkBlack bg-opacity-80 py-2 shadow-md backdrop-blur-md transition-transform duration-200 ease-in-out"
       ref={navbarRef}
     >
       <ul className="flex">
@@ -84,11 +84,11 @@ const Navbar = ({
           return (
             <li
               key={idx}
-              className="first:border-0 border-l-2 border-l-libonatiGold-20 border-opacity-10 px-5"
+              className="border-l-2 border-l-libonatiGold-20 border-opacity-10 px-5 first:border-0"
             >
               <Link
                 href={item.href}
-                className="relative text-libonatiGold flex gap-1 group hover:text-libonatiGold-40 font-[500]"
+                className="group relative flex gap-1 font-[500] text-libonatiGold hover:text-libonatiGold-40"
               >
                 {item.name}
               </Link>
