@@ -34,7 +34,7 @@ const ScrollTopButton = () => {
 
   return (
     <button
-      className="fixed bottom-6 right-6 transition delay-100 z-50 bg-libonatiDarkBlack bg-opacity-50 backdrop-blur-xl rounded-[50%] opacity-0 pointer-events-none"
+      className="pointer-events-none fixed bottom-6 right-6 z-50 rounded-[50%] bg-libonatiDarkBlack bg-opacity-50 opacity-0 backdrop-blur-xl transition delay-100"
       ref={buttonRef}
       onClick={topFunction}
     >

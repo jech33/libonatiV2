@@ -1,13 +1,15 @@
 'use client';
+/** Libraries **/
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
 
-/** Functional **/
-import { getRelease } from '@api/contentful/route';
-import Footer from '@components/Footer';
-import Loader from '@components/Loader';
-import Navbar from '@components/Navbar';
+/** Assets **/
 import {
   AmazonLogo,
   AppleLogo,
+  FacebookLogo,
   InstagramLogo,
   LinkSimpleHorizontal,
   SoundcloudLogo,
@@ -16,12 +18,14 @@ import {
   TiktokLogo,
   YoutubeLogo,
 } from '@phosphor-icons/react';
+
+/** Functional **/
+import { getRelease } from '@api/contentful/route';
+import Footer from '@components/Footer';
+import Loader from '@components/Loader';
+import Navbar from '@components/Navbar';
 import { splitCamelCase } from '@shared/functions';
 import { ContentfulRelease } from '@shared/types/contentful';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 export default function ReleasePage({
   params,
@@ -49,7 +53,7 @@ export default function ReleasePage({
     const formattedLinks = Object.keys(links).map((link) => {
       let linkName = link;
       let icon = null;
-      let bgColor = null;
+      let className = null;
       switch (link) {
         case 'spotify':
           icon = (
@@ -59,7 +63,7 @@ export default function ReleasePage({
               className="text-green-500 group-hover:text-black"
             />
           );
-          bgColor = 'hover:bg-green-400';
+          className = 'hover:bg-green-400';
           break;
         case 'youtube':
           icon = (
@@ -69,7 +73,7 @@ export default function ReleasePage({
               className="text-red-500 group-hover:text-white"
             />
           );
-          bgColor = 'hover:bg-red-500 hover:text-white';
+          className = 'hover:bg-red-500 hover:text-white';
           break;
         case 'apple':
           linkName = 'Apple Music';
@@ -80,20 +84,20 @@ export default function ReleasePage({
               className="group-hover:text-white"
             />
           );
-          bgColor = 'hover:bg-black hover:text-white';
+          className = 'hover:bg-black hover:text-white';
           break;
         case 'tiktok':
           icon = <TiktokLogo size={32} weight="fill" />;
-          bgColor = 'hover:bg-gray-100';
+          className = 'hover:bg-gray-100 active:bg-gray-100';
           break;
         case 'amazonMusic':
           linkName = 'Amazon Music';
           icon = <AmazonLogo size={32} weight="fill" />;
-          bgColor = 'hover:bg-gray-100';
+          className = 'hover:bg-gray-100 active:bg-gray-100';
           break;
         case 'tidal':
           icon = <TidalLogo size={32} weight="fill" />;
-          bgColor = 'hover:bg-gray-100';
+          className = 'hover:bg-gray-100 active:bg-gray-100';
           break;
         case 'soundcloud':
           icon = (
@@ -103,7 +107,17 @@ export default function ReleasePage({
               className="text-orange-500 group-hover:text-white"
             />
           );
-          bgColor = 'hover:bg-orange-500 hover:text-white';
+          className = 'hover:bg-orange-500 hover:text-white';
+          break;
+        case 'facebook':
+          icon = (
+            <FacebookLogo
+              size={32}
+              weight="fill"
+              className="text-blue-700 group-hover:text-white"
+            />
+          );
+          className = 'hover:bg-blue-700 hover:text-white';
           break;
         case 'instagram':
           icon = (
@@ -113,17 +127,17 @@ export default function ReleasePage({
               className="text-pink-600 group-hover:text-white"
             />
           );
-          bgColor = 'hover:bg-pink-600 hover:text-white';
+          className = 'hover:bg-pink-600 hover:text-white';
           break;
         default:
           icon = <LinkSimpleHorizontal size={32} weight="light" />;
-          bgColor = 'hover:bg-gray-100';
+          className = 'hover:bg-gray-100 active:bg-gray-100';
           break;
       }
       return {
         name: splitCamelCase(linkName),
         icon: icon,
-        bgColor: bgColor,
+        className: className,
         href: links[link as keyof ContentfulRelease['links']],
       };
     });
@@ -147,7 +161,7 @@ export default function ReleasePage({
         ) : (
           <>
             <Image
-              className="object-fill blur-2xl bg-black bg-opacity-20"
+              className="bg-black bg-opacity-20 object-fill blur-2xl"
               placeholder="blur"
               blurDataURL="@components/images/blur.png"
               alt={`${release.name} background image`}
@@ -162,8 +176,8 @@ export default function ReleasePage({
               src={release.image}
             />
             <div className="fixed h-full w-full bg-black bg-opacity-20" />
-            <section className="bg-transparent w-[320px] rounded-lg overflow-hidden z-10 flex flex-col flex-grow items-center first-letter:uppercase mt-12">
-              <figure className="">
+            <section className="z-10 mt-12 flex w-[320px] flex-grow flex-col items-center overflow-hidden rounded-lg bg-transparent first-letter:uppercase">
+              <figure>
                 <Image
                   alt={`${release.name} cover image`}
                   width={320}
@@ -172,29 +186,22 @@ export default function ReleasePage({
                   src={release.image}
                 />
               </figure>
-              <p className="flex flex-col gap-[2px] max-w-full text-body1 text-center bg-black text-white py-4 px-6 w-full">
+              <p className="flex w-full max-w-full flex-col gap-[2px] bg-black px-6 py-4 text-center text-body1 text-white">
                 <span>{release.name}</span>
                 <span>Bruno Libonati</span>
               </p>
-              <ul className="w-full max-w-[320px] py-6 flex flex-col gap-2 bg-white">
+              <ul className="flex w-full max-w-[320px] flex-col gap-2 bg-white py-6">
                 {formatReleaseLinks(release.links).map((link, idx) => (
-                  <li key={idx}>
+                  <li className="flex w-full px-5" key={idx}>
                     <Link
-                      className="group flex items-center justify-center px-3 select-none first-letter:uppercase text-black"
+                      className={`group flex h-14 max-h-14 w-full items-center justify-center gap-2 rounded-md border-[1px] border-x-gray-100 p-2 font-semibold text-black shadow-[0_0_10px_-3px_rgba(0,0,0,0.1)] transition-colors duration-150 ${link.className}`}
                       href={link.href}
                       target="_blank"
                     >
-                      <div
-                        className={`flex items-center justify-center font-semibold 
-                      gap-2 p-2 w-full rounded-md border-[1px] border-x-gray-100
-                      shadow-[0_0_10px_-3px_rgba(0,0,0,0.1)]
-                      transition-colors duration-150 ${link.bgColor}`}
-                      >
-                        {link.icon}
-                        <span className="first-letter:uppercase">
-                          {splitCamelCase(link.name).toLowerCase()}
-                        </span>
-                      </div>
+                      <span>{link.icon}</span>
+                      <span className="line-clamp-1 overflow-hidden text-ellipsis first-letter:uppercase">
+                        {splitCamelCase(link.name).toLowerCase()}
+                      </span>
                     </Link>
                   </li>
                 ))}
