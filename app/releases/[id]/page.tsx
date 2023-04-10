@@ -139,7 +139,7 @@ export default function ReleasePage({
   return (
     <>
       <Navbar hideLatestRelease />
-      <main className="flex flex-grow flex-col justify-between text-libonatiGrayYellow">
+      <main className="flex flex-grow flex-col items-center justify-between text-libonatiGrayYellow">
         {!release || loading ? (
           <section className="flex flex-grow items-center justify-center text-libonatiGold">
             <Loader />
@@ -153,17 +153,20 @@ export default function ReleasePage({
               src={release.image}
             />
             <div className="fixed h-full w-full bg-black bg-opacity-20" />
-            <section className="z-10 flex flex-col flex-grow items-center first-letter:uppercase mt-12">
+            <section className="w-[320px] rounded-lg overflow-hidden z-10 flex flex-col flex-grow items-center first-letter:uppercase mt-12">
               <figure>
                 <Image
                   alt={`${release.name} cover image`}
-                  className="rounded-t-lg"
                   width={320}
                   height={320}
                   src={release.image}
                 />
               </figure>
-              <ul className="bg-white w-full max-w-[320px] py-6 flex flex-col gap-2">
+              <p className="flex flex-col gap-[2px] max-w-full text-body1 text-center bg-black text-white py-4 px-6 w-full">
+                <span>{release.name}</span>
+                <span>Bruno Libonati</span>
+              </p>
+              <ul className="w-full max-w-[320px] py-6 flex flex-col gap-2 bg-white">
                 {formatReleaseLinks(release.links).map((link, idx) => (
                   <li key={idx}>
                     <Link
