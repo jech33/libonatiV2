@@ -31,26 +31,51 @@ const Navbar = ({
   ];
 
   const hideNavbar = () => {
-    const currentScrollPos = window.pageYOffset;
+    const scrollingElement = document.scrollingElement;
+    if (!scrollingElement) return;
     if (navbarRef.current === null) return;
 
-    if (prevScrollPos > currentScrollPos) {
+    const scrollHeight = scrollingElement.scrollHeight - window.innerHeight;
+    const currentScrollPos = window.scrollY;
+
+    /* This code block is checking if the user has scrolled to the top of the page. If the current
+    scroll position is less than or equal to 0, it sets the transform style of the navbar to
+    'translateY(0px)', which means it will be positioned at the top of the screen. It also sets the
+    previous scroll position to 0 and returns, so that the rest of the code block is not executed. */
+    if (currentScrollPos <= 0) {
       navbarRef.current.style.transform = 'translateY(0px)';
-    } else {
+      prevScrollPos = currentScrollPos;
+      return;
+    }
+
+    /* This code block is checking if the user has scrolled to the bottom of the page. If the current
+    scroll position is greater than or equal to the maximum scroll height (which is the total height
+    of the scrolling element minus the height of the viewport), it sets the transform style of the
+    navbar to 'translateY(-100px)', which means it will be positioned off the screen. It also sets
+    the previous scroll position to the maximum scroll height, so that the rest of the code block is
+    not executed. */
+    if (currentScrollPos >= scrollHeight) {
       navbarRef.current.style.transform = 'translateY(-100px)';
+      prevScrollPos = currentScrollPos;
+      return;
+    }
+
+    if (currentScrollPos > prevScrollPos) {
+      navbarRef.current.style.transform = 'translateY(-100px)';
+    } else {
+      navbarRef.current.style.transform = 'translateY(0px)';
     }
     prevScrollPos = currentScrollPos;
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', hideNavbar);
-    return () => window.removeEventListener('scroll', hideNavbar);
+    window.onscroll = hideNavbar;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <nav
-      className="fixed top-6 right-6 bg-libonatiDarkBlack bg-opacity-80 rounded-3xl py-2 z-50 backdrop-blur-md shadow-md transition-transform duration-300 ease-in-out"
+      className="fixed top-6 right-6 bg-libonatiDarkBlack bg-opacity-80 rounded-3xl py-2 z-50 backdrop-blur-md shadow-md transition-transform duration-200 ease-in-out"
       ref={navbarRef}
     >
       <ul className="flex">
