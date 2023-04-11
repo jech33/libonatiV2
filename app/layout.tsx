@@ -23,8 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${montserrat.variable} ${lora.variable} ${roboto.variable}
-        margin-0 flex min-h-[100dvh] flex-col bg-gradient-to-r 
-        from-black to-libonatiDarkBlack font-montserrat`}
+        margin-0 flex min-h-[100dvh] flex-col font-montserrat`}
       >
         {children}
       </body>

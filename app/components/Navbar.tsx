@@ -80,13 +80,16 @@ const Navbar = ({
     >
       <ul className="flex">
         {navBarItems.map((item, idx) => {
-          if (item.hide) return null;
+          if (item.hide) return undefined;
           return (
             <li
               key={idx}
               className="border-l-2 border-l-libonatiGold-20 border-opacity-10 px-5 first:border-0"
             >
               <Link
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
                 href={item.href}
                 className="group relative flex gap-1 font-[500] text-libonatiGold hover:text-libonatiGold-40"
               >

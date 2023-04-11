@@ -24,7 +24,9 @@ export default function Home() {
   return (
     <>
       <Navbar hideHome />
-      <main className={`text-libonatiGold`}>
+      <main
+        className={`bg-gradient-to-r from-black to-libonatiDarkBlack text-libonatiGold`}
+      >
         <ScrollTopButton />
         {/* Logo */}
         <div className="m-auto flex h-[100svh] items-center px-5 md:container">

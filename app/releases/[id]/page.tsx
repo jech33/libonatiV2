@@ -44,7 +44,7 @@ export default function ReleasePage({
   return (
     <>
       <Navbar hideLatestRelease />
-      <main className="flex flex-grow flex-col items-center justify-between text-libonatiGrayYellow">
+      <main className="flex flex-grow flex-col items-center justify-between bg-transparent text-libonatiGrayYellow">
         {!release || loading ? (
           <section className="flex flex-grow items-center justify-center text-libonatiGold">
             <Loader />
