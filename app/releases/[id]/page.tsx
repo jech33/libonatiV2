@@ -5,20 +5,6 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
-/** Assets **/
-import {
-  AmazonLogo,
-  AppleLogo,
-  FacebookLogo,
-  InstagramLogo,
-  LinkSimpleHorizontal,
-  SoundcloudLogo,
-  SpotifyLogo,
-  TidalLogo,
-  TiktokLogo,
-  YoutubeLogo,
-} from '@phosphor-icons/react';
-
 /** Functional **/
 import { getRelease } from '@api/contentful/route';
 import Footer from '@components/Footer';
@@ -26,6 +12,7 @@ import Loader from '@components/Loader';
 import Navbar from '@components/Navbar';
 import { splitCamelCase } from '@shared/functions';
 import { ContentfulRelease } from '@shared/types/contentful';
+import { formatReleaseLinks } from './utils';
 
 export default function ReleasePage({
   params,
@@ -47,101 +34,6 @@ export default function ReleasePage({
     }
     setLoading(false);
     setRelease(data);
-  };
-
-  const formatReleaseLinks = (links: ContentfulRelease['links']) => {
-    const formattedLinks = Object.keys(links).map((link) => {
-      let linkName = link;
-      let icon = null;
-      let className = null;
-      switch (link) {
-        case 'spotify':
-          icon = (
-            <SpotifyLogo
-              size={32}
-              weight="fill"
-              className="text-green-500 group-hover:text-black"
-            />
-          );
-          className =
-            'hover:bg-green-400 hover:text-black active:bg-green-400 active:text-black';
-          break;
-        case 'youtube':
-          icon = (
-            <YoutubeLogo
-              size={32}
-              weight="fill"
-              className="text-red-500 group-hover:text-white"
-            />
-          );
-          className = 'hover:bg-red-500 hover:text-white';
-          break;
-        case 'apple':
-          linkName = 'Apple Music';
-          icon = (
-            <AppleLogo
-              size={32}
-              weight="fill"
-              className="group-hover:text-white"
-            />
-          );
-          className = 'hover:bg-gray-700 hover:text-white';
-          break;
-        case 'tiktok':
-          icon = <TiktokLogo size={32} weight="fill" />;
-          className = 'hover:bg-purple-900 active:bg-purple-900';
-          break;
-        case 'amazonMusic':
-          linkName = 'Amazon Music';
-          icon = <AmazonLogo size={32} weight="fill" />;
-          className = 'hover:bg-blue-600 hover:text-white';
-          break;
-        case 'tidal':
-          icon = <TidalLogo size={32} weight="fill" />;
-          break;
-        case 'soundcloud':
-          icon = (
-            <SoundcloudLogo
-              size={32}
-              weight="fill"
-              className="text-orange-500 group-hover:text-white"
-            />
-          );
-          className = 'hover:bg-orange-500 hover:text-white';
-          break;
-        case 'facebook':
-          icon = (
-            <FacebookLogo
-              size={32}
-              weight="fill"
-              className="text-blue-700 group-hover:text-white"
-            />
-          );
-          className = 'hover:bg-blue-700 hover:text-white';
-          break;
-        case 'instagram':
-          icon = (
-            <InstagramLogo
-              size={32}
-              weight="fill"
-              className="text-pink-600 group-hover:text-white"
-            />
-          );
-          className = 'hover:bg-pink-600 hover:text-white';
-          break;
-        default:
-          icon = <LinkSimpleHorizontal size={32} weight="regular" />;
-          break;
-      }
-      return {
-        name: splitCamelCase(linkName),
-        icon: icon,
-        className: className || 'hover:bg-black hover:text-white',
-        href: links[link as keyof ContentfulRelease['links']],
-      };
-    });
-
-    return formattedLinks;
   };
 
   useEffect(() => {
