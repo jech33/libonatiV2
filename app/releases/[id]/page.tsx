@@ -159,22 +159,16 @@ export default function ReleasePage({
           </section>
         ) : (
           <>
-            <Image
-              className="bg-black bg-opacity-20 object-fill blur-2xl"
-              placeholder="blur"
-              blurDataURL="@components/images/blur.png"
-              alt={`${release.name} background image`}
-              fill
-              priority
-              onLoadStart={() => {
-                setLoading(true);
-              }}
-              onLoad={() => {
-                setLoading(false);
-              }}
-              src={release.image}
-            />
-            <div className="image-overlay fixed h-full w-full bg-black bg-opacity-20" />
+            <div className="img-wrapper fixed h-full w-full">
+              <Image
+                className="bg-black bg-opacity-20 object-fill blur-2xl"
+                alt={`${release.name} background image`}
+                fill
+                priority
+                src={release.image}
+              />
+            </div>
+            <div className="overlay fixed h-full w-full bg-black bg-opacity-20" />
             <section className="z-10 mt-12 flex w-[320px] flex-grow flex-col items-center overflow-hidden rounded-lg bg-transparent first-letter:uppercase">
               <figure>
                 <Image

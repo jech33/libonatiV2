@@ -52,8 +52,8 @@ export const useLiboStore = create<LiboStoreState>((set) => ({
     const posts = await getPosts();
     const events = await getEvents();
     const latestRelease = await getLatestRelease();
-    const homeSection1 = posts.find((post) => post.slug === 'the-band');
-    const homeSection2 = posts.find((post) => post.slug === 'history');
+    const homeSection1 = posts.find((post) => post.slug === 'home-section-1');
+    const homeSection2 = posts.find((post) => post.slug === 'home-section-2');
     set({
       homeSection1,
       homeSection2,

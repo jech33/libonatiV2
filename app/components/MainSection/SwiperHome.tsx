@@ -43,6 +43,7 @@ export default function SwiperHome({ id }: { id: string }) {
               <Image
                 alt={`${crewMate.nickname} photo`}
                 src={crewMate.mainPhoto}
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className={`object-cover`}
                 fill
                 priority
