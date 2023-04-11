@@ -63,7 +63,8 @@ export default function ReleasePage({
               className="text-green-500 group-hover:text-black"
             />
           );
-          className = 'hover:bg-green-400';
+          className =
+            'hover:bg-green-400 hover:text-black active:bg-green-400 active:text-black';
           break;
         case 'youtube':
           icon = (
@@ -84,20 +85,19 @@ export default function ReleasePage({
               className="group-hover:text-white"
             />
           );
-          className = 'hover:bg-black hover:text-white';
+          className = 'hover:bg-gray-700 hover:text-white';
           break;
         case 'tiktok':
           icon = <TiktokLogo size={32} weight="fill" />;
-          className = 'hover:bg-gray-100 active:bg-gray-100';
+          className = 'hover:bg-purple-900 active:bg-purple-900';
           break;
         case 'amazonMusic':
           linkName = 'Amazon Music';
           icon = <AmazonLogo size={32} weight="fill" />;
-          className = 'hover:bg-gray-100 active:bg-gray-100';
+          className = 'hover:bg-blue-600 hover:text-white';
           break;
         case 'tidal':
           icon = <TidalLogo size={32} weight="fill" />;
-          className = 'hover:bg-gray-100 active:bg-gray-100';
           break;
         case 'soundcloud':
           icon = (
@@ -130,14 +130,13 @@ export default function ReleasePage({
           className = 'hover:bg-pink-600 hover:text-white';
           break;
         default:
-          icon = <LinkSimpleHorizontal size={32} weight="light" />;
-          className = 'hover:bg-gray-100 active:bg-gray-100';
+          icon = <LinkSimpleHorizontal size={32} weight="regular" />;
           break;
       }
       return {
         name: splitCamelCase(linkName),
         icon: icon,
-        className: className,
+        className: className || 'hover:bg-black hover:text-white',
         href: links[link as keyof ContentfulRelease['links']],
       };
     });
@@ -175,7 +174,7 @@ export default function ReleasePage({
               }}
               src={release.image}
             />
-            <div className="fixed h-full w-full bg-black bg-opacity-20" />
+            <div className="image-overlay fixed h-full w-full bg-black bg-opacity-20" />
             <section className="z-10 mt-12 flex w-[320px] flex-grow flex-col items-center overflow-hidden rounded-lg bg-transparent first-letter:uppercase">
               <figure>
                 <Image
@@ -186,26 +185,30 @@ export default function ReleasePage({
                   src={release.image}
                 />
               </figure>
-              <p className="flex w-full max-w-full flex-col gap-[2px] bg-black px-6 py-4 text-center text-body1 text-white">
-                <span>{release.name}</span>
-                <span>Bruno Libonati</span>
-              </p>
-              <ul className="flex w-full max-w-[320px] flex-col gap-2 bg-white py-6">
-                {formatReleaseLinks(release.links).map((link, idx) => (
-                  <li className="flex w-full px-5" key={idx}>
-                    <Link
-                      className={`group flex h-14 max-h-14 w-full items-center justify-center gap-2 rounded-md border-[1px] border-x-gray-100 p-2 font-semibold text-black shadow-[0_0_10px_-3px_rgba(0,0,0,0.1)] transition-colors duration-150 ${link.className}`}
-                      href={link.href}
-                      target="_blank"
-                    >
-                      <span>{link.icon}</span>
-                      <span className="line-clamp-1 overflow-hidden text-ellipsis first-letter:uppercase">
-                        {splitCamelCase(link.name).toLowerCase()}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <article className="flex w-full max-w-full flex-col justify-center bg-libonatiDarkBlack p-6">
+                <p className="flex w-full max-w-full flex-col gap-[2px] text-center text-body1 text-white">
+                  <span>{release.name}</span>
+                  <span>Bruno Libonati</span>
+                </p>
+                <ul className="mt-6 flex w-full max-w-[320px] flex-col gap-3">
+                  {formatReleaseLinks(release.links).map((link, idx) => (
+                    <li className="flex w-full" key={idx}>
+                      <Link
+                        className={`group relative flex h-12 max-h-14 w-full items-center gap-2 rounded-full rounded-s-full 
+                        bg-black bg-opacity-50 pl-4 pr-4 font-semibold text-libonatiWhiteFont 
+                        shadow-[0_0_10px_-3px_rgba(0,0,0,0.1)] transition-colors duration-150 ${link.className}`}
+                        href={link.href}
+                        target="_blank"
+                      >
+                        <span className="z-[1]">{link.icon}</span>
+                        <span className="absolute left-1/2 line-clamp-1 w-7/12 -translate-x-1/2 overflow-hidden text-ellipsis text-center capitalize">
+                          {splitCamelCase(link.name).toLowerCase()}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </article>
             </section>
             <Footer />
           </>
