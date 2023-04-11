@@ -24,7 +24,7 @@ export default function SwiperHome({ id }: { id: string }) {
     <>
       <Swiper
         id={id}
-        className="user-select-none h-full w-full [&>*]:text-libonatiGold [&>.swiper-pagination>*]:bg-libonatiGold [&>.swiper-pagination>*]:shadow-2xl"
+        className="h-full w-full select-none [&>*]:text-libonatiGold [&>.swiper-pagination>*]:bg-libonatiGold [&>.swiper-pagination>*]:shadow-2xl"
         // install Swiper modules
         modules={[Navigation, FreeMode, Pagination]}
         slidesPerView={1}
