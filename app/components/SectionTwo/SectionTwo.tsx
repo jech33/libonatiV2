@@ -17,15 +17,15 @@ const SectionTwo = () => {
         />
       </div>
 
-      <article className="flex w-full flex-col px-8 py-3 pb-8 text-center text-libonatiGrayYellow md:px-3 lg:w-6/12 lg:pb-0 lg:pl-10 lg:text-right">
+      <article className="flex w-full flex-col px-8 py-3 pb-8 text-center font-[500] text-libonatiGrayYellow md:px-3 lg:w-6/12 lg:pb-0 lg:pl-10 lg:text-right">
         <h1 className="text-heading text-libonatiGold">
-          {post.title.toUpperCase()}
+          {post?.title.toUpperCase()}
         </h1>
-        <h3 className="mt-10 font-lora text-subheading lg:mt-5">
-          {post.subtitle}
+        <h3 className="mt-10 font-lora text-subheading font-bold lg:mt-5">
+          {post?.subtitle}
         </h3>
         <br />
-        <p className="font-roboto text-body1 ">{post.content}</p>
+        <p>{post?.content}</p>
       </article>
     </div>
   );
