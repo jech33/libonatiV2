@@ -32,7 +32,7 @@ export const formatReleaseLinks = (links: ContentfulRelease['links']) => {
       apple: {
         iconComponent: AppleLogo,
         iconClassName: '',
-        className: 'hover:bg-gray-700',
+        className: 'hover:bg-gray-600',
       },
       tiktok: {
         iconComponent: TiktokLogo,
@@ -47,22 +47,22 @@ export const formatReleaseLinks = (links: ContentfulRelease['links']) => {
       tidal: {
         iconComponent: TidalLogo,
         iconClassName: '',
-        className: '',
+        className: 'hover:bg-black',
       },
       soundcloud: {
         iconComponent: SoundcloudLogo,
         iconClassName: 'text-orange-500 group-hover:text-white',
-        className: 'text-orange-500 group-hover:text-white',
+        className: 'hover:bg-orange-500 hover:text-white',
       },
       facebook: {
         iconComponent: FacebookLogo,
         iconClassName: 'text-blue-700 group-hover:text-white',
-        className: 'text-blue-700 group-hover:text-white',
+        className: 'hover:bg-pink-600 hover:text-white',
       },
       instagram: {
         iconComponent: InstagramLogo,
         iconClassName: 'text-pink-600 group-hover:text-white',
-        className: 'text-pink-600 group-hover:text-white',
+        className: 'hover:bg-pink-600 hover:text-white',
       },
       default: {
         iconComponent: LinkSimpleHorizontal,
