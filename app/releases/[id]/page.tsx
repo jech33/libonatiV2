@@ -38,29 +38,37 @@ export default function ReleasePage({
 
   useEffect(() => {
     fetchRelease();
+    console.log(release?.image);
+    document.body.classList.add('relative');
+    return () => {
+      document.body.classList.remove('relative');
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <>
+    <div className="page-container relative flex h-full w-full flex-1 flex-col">
+      {release && !loading && (
+        <div className="img-wrapper absolute -z-[1] h-full w-full lg:fixed">
+          <Image
+            className="-z-[1] object-cover"
+            alt={`${release.name} background image`}
+            fill
+            priority
+            sizes="(max-width: 720px) 720px, 100vw"
+            src={release.image}
+          />
+          <div className="h-full w-full bg-black bg-opacity-30 backdrop-blur-lg" />
+        </div>
+      )}
       <Navbar hideLatestRelease />
-      <main className="flex flex-grow flex-col items-center justify-between bg-transparent text-libonatiGrayYellow">
-        {!release || loading ? (
-          <section className="flex flex-grow items-center justify-center text-libonatiGold">
-            <Loader />
-          </section>
-        ) : (
-          <>
-            <div className="img-wrapper fixed h-full w-full">
-              <Image
-                className="bg-black bg-opacity-20 object-fill blur-2xl"
-                alt={`${release.name} background image`}
-                fill
-                priority
-                src={release.image}
-              />
-            </div>
-            <div className="overlay fixed h-full w-full bg-black bg-opacity-20" />
+      {!release || loading ? (
+        <section className="flex h-full flex-grow items-center justify-center text-libonatiGold">
+          <Loader />
+        </section>
+      ) : (
+        <>
+          <main className="z-10 flex flex-grow flex-col items-center justify-between text-libonatiGrayYellow">
             <section className="z-10 mt-12 flex w-[320px] flex-grow flex-col items-center overflow-hidden rounded-lg bg-transparent first-letter:uppercase">
               <figure>
                 <Image
@@ -96,10 +104,10 @@ export default function ReleasePage({
                 </ul>
               </article>
             </section>
-            <Footer />
-          </>
-        )}
-      </main>
-    </>
+          </main>
+          <Footer />
+        </>
+      )}
+    </div>
   );
 }
